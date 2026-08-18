@@ -740,6 +740,19 @@
   </div>
 </section>
 
+<section class="portfolio" id="portfolio" style="padding:5rem 4%;background:var(--forest);">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-header" style="text-align:center;margin-bottom:2.5rem;">
+      <div class="section-label light" style="justify-content:center;">Our Work</div>
+      <h2 class="section-title">Recent <em>installs.</em></h2>
+      <p class="section-sub">A look at completed Z-Alert installs and wiring jobs across the Copperbelt.</p>
+    </div>
+    <div id="portfolioGallery" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.25rem;">
+      <div style="grid-column:1/-1;text-align:center;color:rgba(255,255,255,0.35);font-size:13px;padding:2rem;">Portfolio coming soon — check back after our next install.</div>
+    </div>
+  </div>
+</section>
+
 <section class="contact" id="contact">
   <div class="contact-inner">
     <div class="section-label">Get In Touch</div>
@@ -810,6 +823,11 @@
   </div>
 </section>
 
+<!-- Firebase + EmailJS: fill in blume-config.js with your project keys -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="blume-config.js"></script>
 <script>
 function sendToWhatsApp() {
   var name = document.getElementById("cf-name").value || "Not provided";
@@ -817,6 +835,22 @@ function sendToWhatsApp() {
   var service = document.getElementById("cf-service").value || "Not specified";
   var location = document.getElementById("cf-location").value || "Not provided";
   var message = document.getElementById("cf-message").value || "No additional details";
+
+  // Fire-and-forget: save the lead to Firestore + notify by email, so nothing is lost
+  // even if the visitor doesn't complete the WhatsApp handoff. Never blocks the WhatsApp open.
+  if (window.blumeDb) {
+    window.blumeDb.collection("leads").add({
+      name: name, phone: phone, service: service, property: location, details: message,
+      status: "new", source: "website-contact-form",
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    }).catch(function(err) { console.warn("Lead save failed (non-blocking):", err); });
+  }
+  if (window.emailjs && window.BLUME_EMAILJS_SERVICE_ID) {
+    emailjs.send(window.BLUME_EMAILJS_SERVICE_ID, window.BLUME_EMAILJS_TEMPLATE_ID, {
+      name: name, phone: phone, service: service, details: location + " — " + message
+    }).catch(function(err) { console.warn("EmailJS send failed (non-blocking):", err); });
+  }
+
   var text = "Hi BLume Power Technologies!%0A%0A"
     + "*Name:* " + encodeURIComponent(name) + "%0A"
     + "*Phone:* " + encodeURIComponent(phone) + "%0A"
@@ -824,6 +858,22 @@ function sendToWhatsApp() {
     + "*Location:* " + encodeURIComponent(location) + "%0A"
     + "*Details:* " + encodeURIComponent(message);
   window.open("https://wa.me/260765692963?text=" + text, "_blank");
+}
+
+// Load portfolio gallery from Firestore (populated via the admin panel)
+if (window.blumeDb) {
+  window.blumeDb.collection("portfolio").orderBy("createdAt", "desc").limit(6).get().then(function(snap) {
+    if (snap.empty) return;
+    var html = "";
+    snap.forEach(function(doc) {
+      var d = doc.data();
+      html += '<div style="background:rgba(255,255,255,0.03);border:0.5px solid rgba(168,213,181,0.12);border-radius:16px;overflow:hidden;">'
+        + '<img src="' + (d.image || '') + '" style="width:100%;height:150px;object-fit:cover;display:block;" onerror="this.style.display=\'none\'">'
+        + '<div style="padding:1rem 1.1rem;"><div style="font-family:\'Playfair Display\',serif;font-size:15px;margin-bottom:0.25rem;">' + (d.title || '') + '</div>'
+        + '<div style="font-size:12.5px;color:rgba(255,255,255,0.5);">' + (d.desc || '') + '</div></div></div>';
+    });
+    document.getElementById("portfolioGallery").innerHTML = html;
+  }).catch(function(err) { console.warn("Portfolio load failed:", err); });
 }
 </script>
 
