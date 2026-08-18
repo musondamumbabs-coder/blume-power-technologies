@@ -13,27 +13,27 @@
    ========================================================================= */
 
 window.blumeFirebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyD31LX-rFk_Jme6gnx1n6qg8ic3wZSTK3g",
+  authDomain: "blume-power-technology.firebaseapp.com",
+  projectId: "blume-power-technology",
+  storageBucket: "blume-power-technology.firebasestorage.app",
+  messagingSenderId: "505398270145",
+  appId: "1:505398270145:web:35dfa429e8288f58ec5c40"
 };
 
-window.BLUME_EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
-window.BLUME_EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
-window.BLUME_EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+window.BLUME_EMAILJS_PUBLIC_KEY = "QCG0TzBGCPUlHKe1x";
+window.BLUME_EMAILJS_SERVICE_ID = "service_arlambf";
+window.BLUME_EMAILJS_TEMPLATE_ID = "template_cz8me08";
 
 // Initialize once these are filled in — safe no-op otherwise.
 (function () {
   try {
-    if (window.blumeFirebaseConfig.apiKey !== "YOUR_API_KEY" && window.firebase) {
+    if (window.blumeFirebaseConfig.apiKey !== "AIzaSyD31LX-rFk_Jme6gnx1n6qg8ic3wZSTK3g" && window.firebase) {
       firebase.initializeApp(window.blumeFirebaseConfig);
       window.blumeDb = firebase.firestore();
       if (firebase.auth) window.blumeAuth = firebase.auth();
     }
-    if (window.BLUME_EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY" && window.emailjs) {
+    if (window.BLUME_EMAILJS_PUBLIC_KEY !== "QCG0TzBGCPUlHKe1x" && window.emailjs) {
       emailjs.init(window.BLUME_EMAILJS_PUBLIC_KEY);
     }
   } catch (e) {
