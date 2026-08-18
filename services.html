@@ -534,6 +534,10 @@
   </div>
 </footer>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="blume-config.js"></script>
 <script>
   let selectedService = "";
 
@@ -550,6 +554,21 @@
     const details = document.getElementById("custDetails").value.trim();
     if (!selectedService) { alert("Please select a service first."); return; }
     if (!name) { alert("Please enter your name."); return; }
+
+    // Fire-and-forget: save to Firestore + notify by email, never blocks WhatsApp handoff
+    if (window.blumeDb) {
+      window.blumeDb.collection("leads").add({
+        name: name, phone: phone, service: selectedService, property: prop || "", details: details,
+        status: "new", source: "services-quote-form",
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      }).catch(function(err) { console.warn("Lead save failed (non-blocking):", err); });
+    }
+    if (window.emailjs && window.BLUME_EMAILJS_SERVICE_ID) {
+      emailjs.send(window.BLUME_EMAILJS_SERVICE_ID, window.BLUME_EMAILJS_TEMPLATE_ID, {
+        name: name, phone: phone, service: selectedService, details: (prop ? prop + " — " : "") + details
+      }).catch(function(err) { console.warn("EmailJS send failed (non-blocking):", err); });
+    }
+
     let msg = "Hi BLume Power Technologies!%0A%0A";
     msg += "📋 *QUOTE REQUEST*%0A";
     msg += "━━━━━━━━━━━━━━━%0A";
