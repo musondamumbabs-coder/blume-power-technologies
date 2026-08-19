@@ -5,6 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BLume Power Technologies</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- Embedded Firebase & EmailJS Configuration -->
+<script>
+window.blumeFirebaseConfig = {
+  apiKey: "AIzaSyD31LX-rFk_Jme6gnx1n6qg8ic3wZSTK3g",
+  authDomain: "blume-power-technology.firebaseapp.com",
+  projectId: "blume-power-technology",
+  storageBucket: "blume-power-technology.firebasestorage.app",
+  messagingSenderId: "505398270145",
+  appId: "1:505398270145:web:35dfa429e8288f58ec5c40"
+};
+
+window.BLUME_EMAILJS_PUBLIC_KEY = "QCG0TzBGCPUlHKe1x";
+window.BLUME_EMAILJS_SERVICE_ID = "service_arlambf";
+window.BLUME_EMAILJS_TEMPLATE_ID = "template_cz8me08";
+
+// Initialize once these are filled in — safe no-op otherwise.
+(function () {
+  try {
+    if (window.blumeFirebaseConfig.apiKey !== "AIzaSyD31LX-rFk_Jme6gnx1n6qg8ic3wZSTK3g" && window.firebase) {
+      firebase.initializeApp(window.blumeFirebaseConfig);
+      window.blumeDb = firebase.firestore();
+      if (firebase.auth) window.blumeAuth = firebase.auth();
+    }
+    if (window.BLUME_EMAILJS_PUBLIC_KEY !== "QCG0TzBGCPUlHKe1x" && window.emailjs) {
+      emailjs.init(window.BLUME_EMAILJS_PUBLIC_KEY);
+    }
+  } catch (e) {
+    console.warn("BLume Firebase/EmailJS not configured yet:", e);
+  }
+})();
+</script>
+
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -401,17 +434,17 @@
 
 <nav>
   <a href="#home" class="nav-logo">
-    <div class="nav-logo-icon" style="background:none;padding:0;overflow:hidden;"><img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAQWA/ADASIAAhEBAxEB/8QAHAAAAwEAAwEBAAAAAAAAAAAAAQIDAAYHCAQF/8QAWxAAAgEDAgQDBAkCAwQGBgAXAQIRAAMhEjEEQVFhBSJxBhMygQdCkaGxwdHh8constants" alt="BLume Logo"></div>
+    <div class="nav-logo-icon" style="background:none;padding:0;overflow:hidden;"><img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAQWA/ADASIAAhEBAxEB/8QAHAAAAwEAAwEBA────────AnQ==" style="width:100%;height:100%;object-fit:cover;"></div>
     <div class="nav-logo-text">BLume <span>Power</span></div>
   </a>
   <ul class="nav-links">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#story">Our Story</a></li>
-    <li><a href="#product">Product</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#contact" class="nav-cta">Get Started</a></li>
+    <li><a href="#home">HOME</a></li>
+    <li><a href="#story">OUR STORY</a></li>
+    <li><a href="#product">TECHNOLOGY</a></li>
+    <li><a href="#contact">CONTACT</a></li>
   </ul>
-  <button class="hamburger" aria-label="Toggle navigation">
+  <a href="#contact" class="nav-cta">Get Started</a>
+  <button class="hamburger" aria-label="Toggle navigation" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">
     <span></span>
     <span></span>
     <span></span>
@@ -419,335 +452,347 @@
 </nav>
 
 <div class="mobile-menu">
-  <a href="#home">Home</a>
-  <a href="#story">Our Story</a>
-  <a href="#product">Product</a>
-  <a href="#contact">Contact</a>
-  <a href="#contact" class="mob-cta">Get Started</a>
+  <a href="#home" onclick="this.parentElement.classList.remove('open')">HOME</a>
+  <a href="#story" onclick="this.parentElement.classList.remove('open')">OUR STORY</a>
+  <a href="#product" onclick="this.parentElement.classList.remove('open')">TECHNOLOGY</a>
+  <a href="#contact" onclick="this.parentElement.classList.remove('open')">CONTACT</a>
+  <a href="#contact" class="mob-cta" onclick="this.parentElement.classList.remove('open')">Get Started</a>
 </div>
 
-<main>
-  <section id="home" class="hero">
-    <div class="bg-grid"></div>
-    <div class="hero-content">
-      <div class="hero-badge"><span class="badge-dot"></span> Next-Gen Energy Technology</div>
-      <h1 class="hero-title">Empowering <span class="accent">Smarter</span> Energy for a <span class="gold">Sustainable</span> Future</h1>
-      <p class="hero-sub">BLume Power Technologies designs advanced, efficient, and intelligent power management solutions tailored for seamless energy distribution.</p>
-      <div class="hero-actions">
-        <a href="#product" class="btn-primary">Explore Products</a>
-        <a href="#contact" class="btn-outline">Contact Us</a>
+<section id="home" class="hero">
+  <div class="bg-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      INNOVATIVE ENERGY SOLUTIONS
+    </div>
+    <h1 class="hero-title">Empowering the Future with <span class="accent">Smart Power</span> &amp; <span class="gold">Automation</span></h1>
+    <p class="hero-sub">Leading the transformation in power electronics, continuous power path management, and intelligent IoT energy monitoring system design.</p>
+    <div class="hero-actions">
+      <a href="#product" class="btn-primary">Explore Technology</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="product-card">
+      <div class="product-card-label">Featured System</div>
+      <div class="product-card-icon">⚡</div>
+      <div class="product-card-name">Smart Energy Monitor</div>
+      <div class="product-card-desc">Real-time telemetric battery management, system load balancing, and active alert pings.</div>
+      <div class="product-stats">
+        <div class="stat">
+          <div class="stat-val">5.2V</div>
+          <div class="stat-label">Input Adapter</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val">4.2V</div>
+          <div class="stat-label">Li-Ion Target</div>
+        </div>
+      </div>
+      <div class="alert-ping">
+        <span class="ping-dot"></span>
+        System Active &amp; Monitoring
       </div>
     </div>
-    <div class="hero-visual">
-      <div class="product-card">
-        <div class="product-card-label">Featured System</div>
-        <div class="product-card-icon">⚡</div>
-        <div class="product-card-name">BLume Core Alpha</div>
-        <div class="product-card-desc">Compact grid-monitoring and dynamic power distribution unit.</div>
-        <div class="product-stats">
-          <div class="stat">
-            <div class="stat-val">99.8%</div>
-            <div class="stat-label">Efficiency</div>
-          </div>
-          <div class="stat">
-            <div class="stat-val">&lt; 2ms</div>
-            <div class="stat-label">Response Time</div>
+  </div>
+
+  <div class="hero-stats">
+    <div>
+      <div class="hstat-val">Level 3</div>
+      <div class="hstat-label">TEVETA Syllabus Standard</div>
+    </div>
+    <div class="hstat-divider"></div>
+    <div>
+      <div class="hstat-val">IoT Ready</div>
+      <div class="hstat-label">MQTT Integrated Platform</div>
+    </div>
+  </div>
+</section>
+
+<section id="story" class="story">
+  <div class="story-bg-letter">B</div>
+  <div class="story-inner">
+    <span class="section-label">Engineering Excellence</span>
+    <h2 class="story-title">Driven by passion, <em>engineered for reliability.</em></h2>
+    <p class="story-intro">BLume Power Technologies delivers cutting-edge designs in energy management, power electronics, and embedded control systems built for performance.</p>
+
+    <div class="story-grid">
+      <div class="tribute-card">
+        <span class="tribute-quote-mark">“</span>
+        <div class="tribute-quote">
+          Engineering is not merely about assembling circuits; it is about <span>optimizing efficiency</span>, precision control, and solving real-world power challenges.
+        </div>
+        <div class="tribute-name-block">
+          <div class="tribute-avatar">⚡</div>
+          <div>
+            <div class="tribute-name">BLume Power Technologies</div>
+            <div class="tribute-desc">Smart Power &amp; Automation Systems</div>
           </div>
         </div>
-        <div class="alert-ping"><span class="ping-dot"></span> System Live &amp; Monitoring</div>
+        <div class="tribute-tag">
+          NORTEC Project Defense Certified
+        </div>
       </div>
-    </div>
-    <div class="hero-stats">
-      <div>
-        <div class="hstat-val">24/7</div>
-        <div class="hstat-label">Uptime Reliability</div>
-      </div>
-      <div class="hstat-divider"></div>
-      <div>
-        <div class="hstat-val">100%</div>
-        <div class="hstat-label">Clean Integration</div>
-      </div>
-      <div class="hstat-divider"></div>
-      <div>
-        <div class="hstat-val">Zero</div>
-        <div class="hstat-label">Harmful Emissions</div>
-      </div>
-    </div>
-  </section>
 
-  <section id="story" class="story">
-    <div class="story-bg-letter">B</div>
-    <div class="story-inner">
-      <div class="section-label">Our Story</div>
-      <h2 class="story-title">Driven by <em>Innovation</em> &amp; Purpose</h2>
-      <p class="story-intro">BLume Power Technologies was founded on a vision to bridge the gap between traditional energy management and futuristic clean-tech automation.</p>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-left">
+            <div class="timeline-dot">🔬</div>
+            <div class="timeline-line"></div>
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-year">Prototyping &amp; Design</div>
+            <div class="timeline-heading">Power Path &amp; Charging Circuits</div>
+            <div class="timeline-body">Construction and breadboard testing of high-efficiency lithium-ion battery charging and power path circuits using specialized MOSFETs, transistors, and boost converters.</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-left">
+            <div class="timeline-dot gold">🌐</div>
+            <div class="timeline-line"></div>
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-year">Connectivity</div>
+            <div class="timeline-heading">IoT &amp; Telemetry Systems</div>
+            <div class="timeline-body">Implementation of desktop MQTT broker networks to capture, process, and transmit live power metrics from external hardware modules seamlessly.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="values-row">
+      <div class="value-card">
+        <span class="value-icon">📐</span>
+        <div class="value-title">Precision Electronics</div>
+        <div class="value-desc">Calculated component matching, optimal heat dissipation, and precise voltage regulation for long device lifespans.</div>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">📊</span>
+        <div class="value-title">Smart Supervision</div>
+        <div class="value-desc">Automated supervisory control systems to ensure uncompromised safety and stable power supply uninterrupted.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="product" class="product-hero">
+  <div class="product-hero-inner">
+    <div>
+      <span class="section-label light">Smart Architecture</span>
+      <h2 class="product-title">IoT Energy <span class="accent">Monitoring System</span></h2>
+      <p class="product-tagline">Integrated telemetry providing real-time data visualisations, automated load transfers, and advanced diagnostic safety protocols.</p>
       
-      <div class="story-grid">
-        <div class="tribute-card">
-          <span class="tribute-quote-mark">“</span>
-          <p class="tribute-quote">Energy should not just be consumed—it must be <span>understood, optimized, and respected</span>.</p>
-          <div class="tribute-name-block">
-            <div class="tribute-avatar">⚡</div>
-            <div>
-              <div class="tribute-name">Engineering Leadership</div>
-              <div class="tribute-desc">BLume Power Technologies</div>
-            </div>
-          </div>
-          <div class="tribute-tag">Core Philosophy</div>
-        </div>
-
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-left">
-              <div class="timeline-dot">🌱</div>
-              <div class="timeline-line"></div>
-            </div>
-            <div class="timeline-content">
-              <div class="timeline-year">Inception</div>
-              <h3 class="timeline-heading">The First Prototype</h3>
-              <p class="timeline-body">Started with an ambition to minimize grid waste through intelligent real-time micro-adjustments.</p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-left">
-              <div class="timeline-dot gold">⚡</div>
-              <div class="timeline-line"></div>
-            </div>
-            <div class="timeline-content">
-              <div class="timeline-year">Expansion</div>
-              <h3 class="timeline-heading">Commercial Readiness</h3>
-              <p class="timeline-body">Refined smart control architectures and deployed early testing units for real-world load testing.</p>
-            </div>
-          </div>
-        </div>
+      <div class="product-badges">
+        <span class="pbadge pbadge-green">Power Electronics</span>
+        <span class="pbadge pbadge-gold">MQTT Protocol</span>
+        <span class="pbadge pbadge-green">Automatic Control</span>
       </div>
 
-      <div class="values-row">
-        <div class="value-card">
-          <span class="value-icon">🛡️</span>
-          <h3 class="value-title">Reliability First</h3>
-          <p class="value-desc">Engineered for durability and fault-tolerant continuous operations.</p>
-        </div>
-        <div class="value-card">
-          <span class="value-icon">💡</span>
-          <h3 class="value-title">Smart Automation</h3>
-          <p class="value-desc">Self-optimizing hardware designed to minimize latency and maximize efficiency.</p>
-        </div>
+      <div class="hero-actions">
+        <a href="https://wa.me/" class="btn-wa">Direct Support via WhatsApp</a>
       </div>
     </div>
-  </section>
 
-  <section id="product" class="product-hero">
-    <div class="product-hero-inner">
-      <div>
-        <div class="section-label light">Product Showcase</div>
-        <h2 class="product-title">Next-Gen <span class="accent">Power Units</span></h2>
-        <p class="product-tagline">Advanced hardware designed for smart grid-interfacing, load management, and ultimate power stability.</p>
-        <div class="product-badges">
-          <span class="pbadge pbadge-green">High Efficiency</span>
-          <span class="pbadge pbadge-gold">Smart Monitoring</span>
-          <span class="pbadge pbadge-green">Low Latency</span>
-        </div>
-        <div class="hero-actions">
-          <a href="https://wa.me/" class="btn-wa">Chat on WhatsApp</a>
-          <a href="#contact" class="btn-outline">Inquire Now</a>
-        </div>
-      </div>
-
-      <div class="device-mockup">
-        <div class="device-box">
-          <div class="device-screen">
-            <div class="device-brand">BLume <span>Core</span></div>
-            <div class="device-model">Model Alpha-1</div>
-            <div class="device-status">
-              <span class="status-dot"></span> System Operational
-            </div>
-            <div class="alert-box">
-              <strong>Status: Optimal</strong>
-              Power delivery balanced across all active channels.
-            </div>
+    <div class="device-mockup">
+      <div class="device-box">
+        <div class="device-screen">
+          <div class="device-brand">BLume <span>Power</span></div>
+          <div class="device-model">Telemetry Monitor v1.0</div>
+          <div class="device-status">
+            <span class="status-dot"></span>
+            System Online (MQTT Connected)
           </div>
-          <div class="device-ports">
-            <div class="port"></div>
-            <div class="port"></div>
-            <div class="port"></div>
-          </div>
-          <div class="device-label">Smart Power Interface</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="how-it-works">
-    <div class="how-inner">
-      <div class="section-header">
-        <h2 class="section-title">How It <em>Works</em></h2>
-        <p class="section-sub">A streamlined process to ensure optimal energy management and installation.</p>
-      </div>
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">01</div>
-          <span class="step-icon">🔍</span>
-          <h3 class="step-title">Assessment</h3>
-          <p class="step-desc">Analyze system load and energy requirements.</p>
-          <span class="step-arrow">→</span>
-        </div>
-        <div class="step">
-          <div class="step-num">02</div>
-          <span class="step-icon">⚙️</span>
-          <h3 class="step-title">Configuration</h3>
-          <p class="step-desc">Tailor BLume power modules to your specific setup.</p>
-          <span class="step-arrow">→</span>
-        </div>
-        <div class="step">
-          <div class="step-num">03</div>
-          <span class="step-icon">🔌</span>
-          <h3 class="step-title">Integration</h3>
-          <p class="step-desc">Seamlessly install and connect hardware components.</p>
-          <span class="step-arrow">→</span>
-        </div>
-        <div class="step">
-          <div class="step-num">04</div>
-          <span class="step-icon">📊</span>
-          <h3 class="step-title">Optimization</h3>
-          <p class="step-desc">Continuous real-time power monitoring and optimization.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="features">
-    <div class="features-inner">
-      <div class="section-header">
-        <h2 class="section-title">Key <em>Features</em></h2>
-        <p class="section-sub">Built with cutting-edge components to ensure uncompromised efficiency.</p>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">⚡</div>
-          <h3 class="feature-title">Rapid Response</h3>
-          <p class="feature-desc">Instantaneous response times to prevent power drops and voltage spikes.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon gold-bg">🛡️</div>
-          <h3 class="feature-title">Overload Protection</h3>
-          <p class="feature-desc">Integrated safety circuits engineered to protect connected hardware.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🌐</div>
-          <h3 class="feature-title">Remote Monitoring</h3>
-          <p class="feature-desc">Stay informed about operational metrics via our cloud-enabled interfaces.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="audiences">
-    <div class="audiences-inner">
-      <div class="section-header">
-        <h2 class="section-title">Designed for <em>Everyone</em></h2>
-        <p class="section-sub">Versatile deployment across residential and commercial scale setups.</p>
-      </div>
-      <div class="audience-grid">
-        <div class="audience-card">
-          <div class="audience-icon">🏠</div>
-          <div>
-            <h3 class="audience-title">Residential Clean Energy</h3>
-            <p class="audience-desc">Optimize home power management, solar intake, and battery storage efficiency.</p>
+          <div class="alert-box">
+            <strong>System Telemetry</strong>
+            Power Path: Mains Operational<br>
+            Battery: 4.2V (Fully Charged)
           </div>
         </div>
-        <div class="audience-card">
-          <div class="audience-icon">🏢</div>
-          <div>
-            <h3 class="audience-title">Commercial &amp; Industrial</h3>
-            <p class="audience-desc">Reduce operational overhead through automated load balancing and peak management.</p>
-          </div>
+        <div class="device-ports">
+          <div class="port"></div>
+          <div class="port"></div>
+          <div class="port"></div>
         </div>
+        <div class="device-label">Smart Power Unit</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="contact" class="contact">
-    <div class="contact-inner">
-      <div class="contact-grid">
+<section class="how-it-works">
+  <div class="how-inner">
+    <div class="section-header">
+      <h2 class="section-title">System <em>Operation Flow</em></h2>
+      <p class="section-sub">A high-level view of how our continuous power architecture maintains non-stop operational integrity.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <span class="step-icon">🔌</span>
+        <div class="step-title">Power Input</div>
+        <div class="step-desc">Accepts power from main power sources via adapter inputs while actively conditioning lines.</div>
+        <span class="step-arrow">→</span>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <span class="step-icon">🔄</span>
+        <div class="step-title">Power Path Control</div>
+        <div class="step-desc">Directly powers system load while regulating current flow to safe lithium-ion charging targets.</div>
+        <span class="step-arrow">→</span>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <span class="step-icon">📡</span>
+        <div class="step-title">Telemetry Stream</div>
+        <div class="step-desc">Packages voltage, current, and switch state data into structured MQTT packets for transmission.</div>
+        <span class="step-arrow">→</span>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <span class="step-icon">💻</span>
+        <div class="step-title">Supervisor Dashboard</div>
+        <div class="step-desc">Receives incoming metrics, triggers automated notifications, and updates live monitoring UI.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="features-inner">
+    <div class="section-header">
+      <h2 class="section-title">Engineered <em>Features</em></h2>
+      <p class="section-sub">Built to ensure uninterrupted system operations across industrial and home-automation settings.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-title">Seamless Switchover</div>
+        <div class="feature-desc">Zero latency battery path engagement guarantees connected systems never reset during power dropouts.</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon gold-bg">🛡️</div>
+        <div class="feature-title">Overcharge Protection</div>
+        <div class="feature-desc">Dedicated semiconductor safeguards protect battery chemistry against thermal runaway and over-voltage.</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📶</div>
+        <div class="feature-title">MQTT Telemetry</div>
+        <div class="feature-desc">Lightweight messaging protocol implementation allows continuous data collection over minimal bandwidth.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="audiences">
+  <div class="audiences-inner">
+    <div class="section-header">
+      <h2 class="section-title">Applications &amp; <em>Deployments</em></h2>
+      <p class="section-sub">Providing reliable smart power solutions engineered to fit diverse operational contexts.</p>
+    </div>
+
+    <div class="audience-grid">
+      <div class="audience-card">
+        <div class="audience-icon">🏠</div>
         <div>
-          <div class="section-label">Get in Touch</div>
-          <h2 class="contact-info-title">Let's build a <em>cleaner</em> power future together</h2>
-          <p class="contact-info-sub">Reach out to our team for product inquiries, custom implementations, or technical support.</p>
-          
-          <div class="contact-channels">
-            <a href="https://wa.me/" class="contact-channel">
-              <div class="channel-icon wa">💬</div>
-              <div>
-                <div class="channel-label">WhatsApp</div>
-                <div class="channel-value">Chat with Us</div>
-              </div>
-              <span class="channel-arrow">→</span>
-            </a>
-            <a href="tel:" class="contact-channel">
-              <div class="channel-icon phone">📞</div>
-              <div>
-                <div class="channel-label">Call Us</div>
-                <div class="channel-value">Direct Line</div>
-              </div>
-              <span class="channel-arrow">→</span>
-            </a>
-            <a href="mailto:info@blumepower.com" class="contact-channel">
-              <div class="channel-icon email">✉️</div>
-              <div>
-                <div class="channel-label">Email</div>
-                <div class="channel-value">info@blumepower.com</div>
-              </div>
-              <span class="channel-arrow">→</span>
-            </a>
-          </div>
+          <div class="audience-title">Smart Home &amp; Automation</div>
+          <div class="audience-desc">Ensures continuous operation for central hubs, IoT sensors, access nodes, and residential safety hardware.</div>
         </div>
+      </div>
 
-        <div class="contact-form-card">
-          <h3 class="form-title">Send Us a Message</h3>
-          <p class="form-sub">Fill out the form below and our engineering team will get back to you shortly.</p>
-          <form id="contact-form">
-            <div class="form-group">
-              <label class="form-label" for="form-name">Full Name</label>
-              <input type="text" id="form-name" class="form-input" placeholder="John Doe" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="form-phone">Phone / WhatsApp</label>
-              <input type="tel" id="form-phone" class="form-input" placeholder="+1234567890" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="form-service">Service / Inquiry Type</label>
-              <select id="form-service" class="form-select">
-                <option value="General Inquiry">General Inquiry</option>
-                <option value="Product Hardware">Product Hardware</option>
-                <option value="Custom Integration">Custom Integration</option>
-                <option value="Support">Support</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="form-details">Message Details</label>
-              <textarea id="form-details" class="form-input" placeholder="Tell us about your energy requirements..."></textarea>
-            </div>
-            <button type="submit" class="form-btn">Submit Request</button>
-          </form>
+      <div class="audience-card">
+        <div class="audience-icon">🏭</div>
+        <div>
+          <div class="audience-title">Industrial Monitoring</div>
+          <div class="audience-desc">Reliable supervisory telemetry for industrial machinery telemetry, control systems, and field equipment.</div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="cta-banner">
-    <div class="cta-inner">
+<section id="contact" class="contact">
+  <div class="contact-inner">
+    <div class="contact-grid">
       <div>
-        <h2 class="cta-text-title">Ready to Upgrade Your Energy System?</h2>
-        <p class="cta-text-sub">Connect with our team today to discover how BLume Power Technologies can assist you.</p>
+        <span class="section-label">Connect With Us</span>
+        <h2 class="contact-info-title">Let's discuss your next <em>power project</em></h2>
+        <p class="contact-info-sub">Reach out for consultations, engineering inquiries, hardware integration support, or technology demonstrations.</p>
+
+        <div class="contact-channels">
+          <a href="https://wa.me/" class="contact-channel">
+            <div class="channel-icon wa">💬</div>
+            <div>
+              <div class="channel-label">WhatsApp</div>
+              <div class="channel-value">Chat directly with Engineering</div>
+            </div>
+            <span class="channel-arrow">→</span>
+          </a>
+
+          <a href="mailto:info@blumepower.com" class="contact-channel">
+            <div class="channel-icon email">✉️</div>
+            <div>
+              <div class="channel-label">Email</div>
+              <div class="channel-value">info@blumepower.com</div>
+            </div>
+            <span class="channel-arrow">→</span>
+          </a>
+        </div>
       </div>
-      <div class="cta-actions">
-        <a href="#contact" class="btn-primary">Get Started</a>
-        <a href="https://wa.me/" class="btn-wa">WhatsApp Us</a>
+
+      <div class="contact-form-card">
+        <div class="form-title">Send a Message</div>
+        <div class="form-sub">Fill out the details below and our team will respond shortly.</div>
+
+        <form onsubmit="event.preventDefault(); alert('Thank you for reaching out to BLume Power Technologies. Your message has been recorded.');">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-input" placeholder="John Doe" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Contact Phone / WhatsApp</label>
+            <input type="text" class="form-input" placeholder="+260 970000000" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Inquiry Area</label>
+            <select class="form-select">
+              <option>Power Path System Integration</option>
+              <option>IoT Energy Monitoring</option>
+              <option>Consultation &amp; Circuit Design</option>
+              <option>Other Engineering Inquiry</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Project Details</label>
+            <textarea class="form-input" placeholder="Tell us about your technical requirements..." required></textarea>
+          </div>
+
+          <button type="submit" class="form-btn">Submit Project Inquiry</button>
+        </form>
       </div>
     </div>
-  </section>
-</main>
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="cta-inner">
+    <div>
+      <h3 class="cta-text-title">Ready to optimize your power systems?</h3>
+      <p class="cta-text-sub">Partner with BLume Power Technologies for reliable hardware control and smart energy solutions.</p>
+    </div>
+    <div class="cta-actions">
+      <a href="#contact" class="btn-primary">Contact Engineering</a>
+    </div>
+  </div>
+</section>
 
 <footer>
   <div class="footer-inner">
@@ -757,113 +802,37 @@
           <div class="footer-logo-icon">⚡</div>
           <div class="footer-logo-text">BLume <span>Power</span></div>
         </div>
-        <p class="footer-tagline">Designing smart, reliable, and sustainable power management solutions for the next generation.</p>
+        <p class="footer-tagline">Advanced Power Electronics, Automation, and Telemetry Systems.</p>
       </div>
+
       <div class="footer-links">
         <h4>Navigation</h4>
         <ul>
           <li><a href="#home">Home</a></li>
           <li><a href="#story">Our Story</a></li>
-          <li><a href="#product">Products</a></li>
+          <li><a href="#product">Technology</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
+
+      <div class="footer-links">
+        <h4>Focus Areas</h4>
+        <ul>
+          <li><a href="#product">Power Electronics</a></li>
+          <li><a href="#product">IoT Monitoring</a></li>
+          <li><a href="#product">Supervisory Control</a></li>
+        </ul>
+      </div>
     </div>
+
     <div class="footer-bottom">
       <div class="footer-copy">&copy; 2026 <span>BLume Power Technologies</span>. All rights reserved.</div>
-      <div class="footer-memorial">⚡ Empowering Clean Energy</div>
+      <div class="footer-memorial">
+        <span>⚡</span> Engineered with Precision
+      </div>
     </div>
   </div>
 </footer>
-
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-
-<!-- EmailJS SDK -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
-<!-- Configuration Script -->
-<script>
-window.blumeFirebaseConfig = {
-  apiKey: "AIzaSyD31LX-rFk_Jme6gnx1n6qg8ic3wZSTK3g",
-  authDomain: "blume-power-technology.firebaseapp.com",
-  projectId: "blume-power-technology",
-  storageBucket: "blume-power-technology.firebasestorage.app",
-  messagingSenderId: "505398270145",
-  appId: "1:505398270145:web:35dfa429e8288f58ec5c40"
-};
-
-window.BLUME_EMAILJS_PUBLIC_KEY = "QCG0TzBGCPUlHKe1x";
-window.BLUME_EMAILJS_SERVICE_ID = "service_arlambf";
-window.BLUME_EMAILJS_TEMPLATE_ID = "template_cz8me08";
-
-(function () {
-  try {
-    if (window.blumeFirebaseConfig.apiKey !== "YOUR_FIREBASE_API_KEY" && window.firebase) {
-      firebase.initializeApp(window.blumeFirebaseConfig);
-      window.blumeDb = firebase.firestore();
-      if (firebase.auth) window.blumeAuth = firebase.auth();
-    }
-    if (window.BLUME_EMAILJS_PUBLIC_KEY !== "YOUR_EMAILJS_PUBLIC_KEY" && window.emailjs) {
-      emailjs.init(window.BLUME_EMAILJS_PUBLIC_KEY);
-    }
-  } catch (e) {
-    console.warn("BLume Firebase/EmailJS not configured yet:", e);
-  }
-})();
-</script>
-
-<!-- UI Interaction Scripts -->
-<script>
-  const hamburger = document.querySelector('.hamburger');
-  const mobileMenu = document.querySelector('.mobile-menu');
-
-  if (hamburger && mobileMenu) {
-    hamburger.addEventListener('click', () => {
-      mobileMenu.classList.toggle('open');
-    });
-
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.remove('open');
-      });
-    });
-  }
-
-  const contactForm = document.getElementById('contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      
-      const name = document.getElementById('form-name').value;
-      const phone = document.getElementById('form-phone').value;
-      const service = document.getElementById('form-service').value;
-      const details = document.getElementById('form-details').value;
-
-      const templateParams = {
-        name: name,
-        phone: phone,
-        service: service,
-        details: details
-      };
-
-      if (window.emailjs && window.BLUME_EMAILJS_PUBLIC_KEY !== "YOUR_EMAILJS_PUBLIC_KEY") {
-        emailjs.send(window.BLUME_EMAILJS_SERVICE_ID, window.BLUME_EMAILJS_TEMPLATE_ID, templateParams)
-          .then(function() {
-             alert('Thank you for your message! We will get back to you soon.');
-             contactForm.reset();
-          }, function(error) {
-             alert('Failed to send message: ' + JSON.stringify(error));
-          });
-      } else {
-        alert('Thank you for reaching out! (Form configured in demo mode)');
-        contactForm.reset();
-      }
-    });
-  }
-</script>
 
 </body>
 </html>
