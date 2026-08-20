@@ -395,6 +395,263 @@
     .hero, .story, .product-hero, .how-it-works,
     .features, .audiences, .contact, .cta-banner { padding-left: 5%; padding-right: 5%; }
   }
+
+/* ===== Services page styles ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --green: #2E8B57; --green-light: #A8D5B5;
+    --forest: #0D1F17; --gold: #FFD166;
+    --mist: #F5F9F6; --charcoal: #2C2C2C;
+    --nav-height: 68px;
+  }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  body { font-family: "DM Sans", sans-serif; background: var(--forest); color: #fff; overflow-x: hidden; max-width: 100vw; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: var(--nav-height);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 4%;
+    background: rgba(13,31,23,0.95); backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid rgba(168,213,181,0.15);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; min-width: 0; }
+  .nav-logo-icon { width: 36px; height: 36px; background: none; padding: 0; overflow: hidden; border-radius: 8px; flex-shrink: 0; }
+  .nav-logo-text { font-family: "Playfair Display", serif; font-size: 15px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .nav-logo-text span { color: var(--green-light); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 13px; color: rgba(255,255,255,0.7); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; white-space: nowrap; }
+  .nav-links a:hover, .nav-links a.active { color: var(--green-light); }
+  .nav-cta { background: var(--green); color: #fff !important; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: 500 !important; }
+
+  /* HAMBURGER */
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: pointer; padding: 6px; background: none; border: none; flex-shrink: 0;
+  }
+  .hamburger span { width: 22px; height: 2px; background: #fff; border-radius: 2px; display: block; transition: all 0.3s; }
+  .mobile-menu {
+    display: none; position: fixed;
+    top: var(--nav-height); left: 0; right: 0;
+    background: rgba(10,25,16,0.99);
+    border-bottom: 0.5px solid rgba(168,213,181,0.15);
+    z-index: 99; padding: 0 5%; flex-direction: column;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-size: 15px; color: rgba(255,255,255,0.8);
+    text-decoration: none; padding: 1rem 0;
+    border-bottom: 0.5px solid rgba(168,213,181,0.08);
+    display: block; transition: color 0.2s;
+  }
+  .mobile-menu a:last-child { border-bottom: none; padding-bottom: 1.5rem; }
+  .mobile-menu a:hover { color: var(--green-light); }
+  .mob-cta {
+    margin-top: 0.5rem !important;
+    background: var(--green) !important; color: #fff !important;
+    padding: 0.85rem 1.5rem !important; border-radius: 8px;
+    text-align: center; font-weight: 500;
+  }
+
+  /* SHARED */
+  .section-wrap { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0; }
+  .section-label { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green-light); margin-bottom: 1rem; }
+  .section-label::before { content: ""; width: 24px; height: 1.5px; background: var(--green-light); display: block; }
+  .section-label-dark { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-bottom: 1rem; }
+  .section-label-dark::before { content: ""; width: 24px; height: 1.5px; background: var(--green); display: block; }
+  .btn-wa { background: #25D366; color: #fff; padding: 0.85rem 1.75rem; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.2s; }
+  .btn-wa:hover { background: #1fad55; }
+  .btn-outline { background: transparent; color: rgba(255,255,255,0.75); padding: 0.85rem 1.75rem; border-radius: 8px; font-size: 14px; text-decoration: none; border: 0.5px solid rgba(255,255,255,0.2); display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: border-color 0.2s, color 0.2s; }
+  .btn-outline:hover { border-color: var(--green-light); color: var(--green-light); }
+  .btn-primary { background: var(--green); color: #fff; padding: 0.85rem 1.75rem; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+
+  /* HERO */
+  .hero {
+    padding-top: calc(var(--nav-height) + 4rem);
+    padding-bottom: 5rem; padding-left: 5%; padding-right: 5%;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 70% at 70% 40%, rgba(46,139,87,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .bg-grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(168,213,181,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(168,213,181,0.04) 1px, transparent 1px);
+    background-size: 60px 60px; pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 620px; }
+  .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 1.25rem; flex-wrap: wrap; }
+  .breadcrumb a { color: var(--green-light); text-decoration: none; }
+  .hero-title { font-family: "Playfair Display", serif; font-size: clamp(2rem, 6vw, 3.6rem); font-weight: 700; line-height: 1.15; margin-bottom: 1rem; }
+  .hero-title em { font-style: italic; color: var(--green-light); }
+  .location-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(46,139,87,0.15); border: 0.5px solid rgba(46,139,87,0.3); border-radius: 99px; padding: 0.4rem 1rem; font-size: 12px; color: var(--green-light); margin-bottom: 1.25rem; }
+  .hero-sub { font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 1.5rem; }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 2rem; }
+  .badge { display: inline-flex; align-items: center; gap: 5px; padding: 0.35rem 0.75rem; border-radius: 99px; font-size: 11px; font-weight: 500; }
+  .badge-green { background: rgba(46,139,87,0.2); border: 0.5px solid rgba(46,139,87,0.4); color: var(--green-light); }
+  .badge-gold { background: rgba(255,209,102,0.15); border: 0.5px solid rgba(255,209,102,0.35); color: var(--gold); }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  /* SERVICES */
+  .services { padding: 5rem 5%; background: var(--mist); color: var(--charcoal); position: relative; overflow: hidden; }
+  .services::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(46,139,87,0.06) 1px, transparent 1px); background-size: 32px 32px; pointer-events: none; }
+  .services-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 2; }
+  .section-title-dark { font-family: "Playfair Display", serif; font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 700; color: var(--forest); margin-bottom: 0.75rem; }
+  .section-title-dark em { font-style: italic; color: var(--green); }
+  .section-sub-dark { font-size: 14px; color: #666; line-height: 1.7; margin-bottom: 2.5rem; max-width: 520px; }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .service-card { background: #fff; border: 0.5px solid rgba(46,139,87,0.15); border-radius: 20px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+  .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(46,139,87,0.12); }
+  .service-card-top { padding: 1.75rem; background: var(--forest); position: relative; overflow: hidden; }
+  .service-card-top::before { content: ""; position: absolute; top: -30px; right: -30px; width: 120px; height: 120px; background: radial-gradient(circle, rgba(46,139,87,0.25), transparent 70%); pointer-events: none; }
+  .service-num { font-family: "Playfair Display", serif; font-size: 48px; font-weight: 700; color: rgba(46,139,87,0.15); line-height: 1; margin-bottom: 0.5rem; }
+  .service-icon { font-size: 32px; }
+  .service-card-body { padding: 1.5rem; }
+  .service-title { font-family: "Playfair Display", serif; font-size: 18px; color: var(--forest); margin-bottom: 0.6rem; }
+  .service-desc { font-size: 13px; color: #666; line-height: 1.7; margin-bottom: 1rem; }
+  .service-includes { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .service-includes li { font-size: 12px; color: #555; display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
+  .service-includes li::before { content: "✓"; color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+  /* ZESCO BANNER */
+  .zesco-banner { margin-top: 2.5rem; background: var(--forest); border-radius: 18px; padding: 1.75rem 2rem; display: flex; align-items: flex-start; gap: 1.5rem; flex-wrap: wrap; }
+  .zesco-icon { font-size: 36px; flex-shrink: 0; }
+  .zesco-title { font-family: "Playfair Display", serif; font-size: 17px; color: #fff; margin-bottom: 4px; }
+  .zesco-desc { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+  .zesco-badge { background: rgba(255,209,102,0.12); border: 0.5px solid rgba(255,209,102,0.3); border-radius: 12px; padding: 0.85rem 1.25rem; flex-shrink: 0; }
+  .zesco-badge-title { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+  .zesco-badge-val { font-family: "Playfair Display", serif; font-size: 15px; color: var(--gold); }
+
+  /* QUOTE FORM */
+  .quote-section { padding: 5rem 5%; background: var(--mist); color: var(--charcoal); }
+  .quote-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.3fr; gap: 3rem; align-items: start; }
+  .quote-trust { display: flex; flex-direction: column; gap: 12px; margin-top: 1.5rem; }
+  .trust-row { display: flex; align-items: center; gap: 12px; }
+  .trust-icon { width: 36px; height: 36px; background: #e8f7ef; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .trust-text { font-size: 13px; color: #555; }
+  .quote-form-card { background: var(--forest); border-radius: 20px; padding: 2rem; }
+  .form-title { font-family: "Playfair Display", serif; font-size: 19px; color: #fff; margin-bottom: 0.4rem; }
+  .form-sub { font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 1.75rem; line-height: 1.6; }
+  .form-label { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.5); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; display: block; }
+  .form-group { margin-bottom: 1rem; }
+  .svc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 1rem; }
+  .svc-opt { background: rgba(255,255,255,0.05); border: 1.5px solid rgba(168,213,181,0.15); border-radius: 10px; padding: 0.65rem; font-size: 12px; color: rgba(255,255,255,0.6); transition: all 0.2s; text-align: center; cursor: pointer; line-height: 1.4; }
+  .svc-opt.active { background: rgba(46,139,87,0.2); border-color: #2E8B57; color: var(--green-light); }
+  .form-input { width: 100%; background: rgba(255,255,255,0.05); border: 0.5px solid rgba(168,213,181,0.15); border-radius: 10px; padding: 0.75rem 1rem; font-size: 16px; color: #fff; font-family: "DM Sans", sans-serif; outline: none; transition: border-color 0.2s; -webkit-appearance: none; }
+  .form-input:focus { border-color: var(--green); }
+  .form-input::placeholder { color: rgba(255,255,255,0.25); }
+  textarea.form-input { resize: vertical; min-height: 80px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .form-btn { width: 100%; background: #25D366; color: #fff; border: none; border-radius: 10px; padding: 0.9rem; font-size: 15px; font-weight: 500; font-family: "DM Sans", sans-serif; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.2s; margin-top: 0.5rem; }
+  .form-btn:hover { background: #1fad55; }
+  .form-hint { text-align: center; font-size: 11px; color: rgba(255,255,255,0.25); margin-top: 0.6rem; }
+
+  /* WHY */
+  .why { padding: 5rem 5%; background: #0a1910; }
+  .why-inner { max-width: 1100px; margin: 0 auto; }
+  .section-title-light { font-family: "Playfair Display", serif; font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 700; color: #fff; margin-bottom: 0.6rem; }
+  .section-title-light em { font-style: italic; color: var(--green-light); }
+  .section-sub-light { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.7; max-width: 480px; margin-bottom: 2.5rem; }
+  .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .why-card { background: rgba(255,255,255,0.03); border: 0.5px solid rgba(168,213,181,0.12); border-radius: 16px; padding: 1.5rem; text-align: center; transition: border-color 0.2s, transform 0.2s; }
+  .why-card:hover { border-color: rgba(46,139,87,0.4); transform: translateY(-3px); }
+  .why-icon { font-size: 30px; margin-bottom: 0.75rem; display: block; }
+  .why-title { font-size: 14px; font-weight: 500; color: #fff; margin-bottom: 0.4rem; }
+  .why-desc { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.6; }
+
+  /* PROCESS */
+  .process { padding: 5rem 5%; background: var(--forest); }
+  .process-inner { max-width: 1100px; margin: 0 auto; }
+  .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(168,213,181,0.08); border-radius: 18px; overflow: hidden; margin-top: 2.5rem; }
+  .process-step { background: rgba(255,255,255,0.02); padding: 1.75rem 1.25rem; position: relative; transition: background 0.2s; }
+  .process-step:hover { background: rgba(46,139,87,0.08); }
+  .process-num { font-family: "Playfair Display", serif; font-size: 42px; font-weight: 700; color: rgba(46,139,87,0.15); line-height: 1; margin-bottom: 0.75rem; }
+  .process-icon { font-size: 26px; margin-bottom: 0.6rem; display: block; }
+  .process-title { font-size: 13px; font-weight: 500; color: #fff; margin-bottom: 0.4rem; }
+  .process-desc { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.6; }
+  .process-arrow { position: absolute; right: 0; top: 50%; transform: translateY(-50%); font-size: 14px; color: rgba(46,139,87,0.4); z-index: 2; }
+  .process-step:last-child .process-arrow { display: none; }
+
+  /* CTA */
+  .cta { padding: 5rem 5%; background: linear-gradient(135deg, #1a5c35 0%, #0D1F17 60%); position: relative; overflow: hidden; }
+  .cta::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(255,209,102,0.08) 0%, transparent 70%); pointer-events: none; }
+  .cta-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem; position: relative; z-index: 2; }
+  .cta-title { font-family: "Playfair Display", serif; font-size: clamp(1.5rem, 4vw, 2.4rem); font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+  .cta-sub { font-size: 14px; color: rgba(255,255,255,0.55); max-width: 400px; line-height: 1.7; }
+  .cta-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  /* FOOTER */
+  footer { background: #060e09; padding: 3rem 5% 2rem; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; }
+  .footer-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 2rem; padding-bottom: 2rem; border-bottom: 0.5px solid rgba(168,213,181,0.08); margin-bottom: 2rem; }
+  .footer-brand { max-width: 260px; }
+  .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 0.75rem; }
+  .footer-logo-icon { width: 32px; height: 32px; background: none; padding: 0; overflow: hidden; border-radius: 7px; }
+  .footer-logo-text { font-family: "Playfair Display", serif; font-size: 14px; color: #fff; }
+  .footer-logo-text span { color: var(--green-light); }
+  .footer-tagline { font-size: 12px; color: rgba(255,255,255,0.35); line-height: 1.7; }
+  .footer-links h4 { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 0.75rem; }
+  .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .footer-links a { font-size: 13px; color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--green-light); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
+  .footer-copy span { color: var(--green-light); }
+  .footer-memorial { font-size: 12px; color: rgba(255,209,102,0.5); }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .nav-logo-text { font-size: 13px; max-width: 160px; }
+
+    .hero { padding: calc(var(--nav-height) + 2rem) 5% 5rem; }
+    .hero-title { font-size: 2rem; }
+    .hero-sub { font-size: 14px; }
+    .hero-actions { flex-direction: column; }
+    .hero-actions a { width: 100%; }
+    .hero-badges { gap: 6px; }
+    .badge { font-size: 10px; padding: 0.3rem 0.6rem; }
+
+    .services { padding: 4rem 5%; }
+    .services-grid { grid-template-columns: 1fr !important; gap: 16px; }
+
+    .quote-section { padding: 4rem 5%; }
+    .quote-inner { grid-template-columns: 1fr !important; gap: 2rem; }
+    .form-row { grid-template-columns: 1fr !important; }
+    .svc-grid { grid-template-columns: 1fr 1fr; }
+
+    .why { padding: 4rem 5%; }
+    .why-grid { grid-template-columns: 1fr 1fr !important; gap: 12px; }
+
+    .process { padding: 4rem 5%; }
+    .process-steps { grid-template-columns: 1fr !important; border-radius: 16px; }
+    .process-arrow { display: none; }
+    .process-step { padding: 1.5rem; }
+
+    .cta { padding: 4rem 5%; }
+    .cta-inner { flex-direction: column; }
+    .cta-actions { flex-direction: column; width: 100%; }
+    .cta-actions a { width: 100%; }
+
+    .zesco-banner { flex-direction: column; gap: 1rem; }
+    .zesco-badge { width: 100%; }
+
+    .footer-top { flex-direction: column; gap: 1.5rem; }
+    .footer-bottom { flex-direction: column; text-align: center; gap: 0.5rem; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-title { font-size: 1.75rem; }
+    .why-grid { grid-template-columns: 1fr !important; }
+    .svc-grid { grid-template-columns: 1fr 1fr; }
+    .nav-logo-text { max-width: 130px; font-size: 12px; }
+  }
+
+  @keyframes pulse { 0%, 100% { opacity:1; transform:scale(1); } 50% { opacity:0.5; transform:scale(1.3); } }
 </style>
 </head>
 <body>
@@ -408,7 +665,7 @@
     <li><a href="#home">Home</a></li>
     <li><a href="#products">Products</a></li>
     <li><a href="#story">Our Story</a></li>
-    <li><a href="services.html">Services</a></li>
+    <li><a href="#services">Services</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="https://wa.me/260765692963" target="_blank" class="nav-cta">Get Z-Alert</a></li>
   </ul>
@@ -421,7 +678,7 @@
 <div class="mobile-menu" id="mobileMenu">
   <a href="#home" onclick="closeMenu()">Home</a>
   <a href="#products" onclick="closeMenu()">Z-Alert</a>
-  <a href="services.html" onclick="closeMenu()">Services</a>
+  <a href="#services" onclick="closeMenu()">Services</a>
   <a href="#story" onclick="closeMenu()">Our Story</a>
   <a href="#contact" onclick="closeMenu()">Contact</a>
   <a href="https://wa.me/260765692963" target="_blank" class="mob-cta">💬 Get Z-Alert</a>
@@ -556,7 +813,7 @@
             <span style="background:rgba(46,139,87,0.2);border:0.5px solid rgba(46,139,87,0.4);border-radius:99px;padding:0.3rem 0.75rem;font-size:11px;color:var(--green-light);">✅ Rewiring</span>
             <span style="background:rgba(46,139,87,0.2);border:0.5px solid rgba(46,139,87,0.4);border-radius:99px;padding:0.3rem 0.75rem;font-size:11px;color:var(--green-light);">✅ DB Board</span>
           </div>
-          <a href="services.html" style="display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;padding:0.75rem 1.5rem;border-radius:8px;font-size:13px;font-weight:500;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='#246b44'" onmouseout="this.style.background='#2E8B57'">🏠 View Wiring Services →</a>
+          <a href="#services" style="display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;padding:0.75rem 1.5rem;border-radius:8px;font-size:13px;font-weight:500;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='#246b44'" onmouseout="this.style.background='#2E8B57'">🏠 View Wiring Services →</a>
         </div>
       </div>
 
@@ -753,6 +1010,211 @@
   </div>
 </section>
 
+
+<!-- ============ SERVICES SECTION (merged from services.html) ============ -->
+<!-- HERO -->
+<section class="hero" id="services">
+  <div class="bg-grid"></div>
+  <div class="hero-content">
+    <div class="breadcrumb">
+      <a href="#home">Home</a><span>›</span><span>House Wiring & Installations</span>
+    </div>
+    <div class="section-label">Electrical Services</div>
+    <h1 class="hero-title">House Wiring &<br><em>Installations</em></h1>
+    <div class="location-badge">📍 Serving Ndola & the Copperbelt</div>
+    <p class="hero-sub">ZESCO-standard domestic wiring by a NORTEC-trained expert. Every job supervised and certified by EIZ-licensed professionals for full ZESCO compliance.</p>
+    <div class="hero-badges">
+      <span class="badge badge-green">✅ New House Wiring</span>
+      <span class="badge badge-green">✅ Rewiring</span>
+      <span class="badge badge-green">✅ DB Board</span>
+      <span class="badge badge-gold">🏅 EIZ-Licensed</span>
+      <span class="badge badge-gold">⚡ ZESCO Compliant</span>
+      <span class="badge badge-gold">💬 Free Quote</span>
+    </div>
+    <div class="hero-actions">
+      <a href="https://wa.me/260765692963?text=Hi%20BLume%20Power%2C%20I%27d%20like%20a%20free%20quote%20for%20house%20wiring." target="_blank" class="btn-wa">💬 Get Free Quote on WhatsApp</a>
+      <a href="#contact" class="btn-outline">📞 Other Contact →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services">
+  <div class="services-inner">
+    <div class="section-label-dark">What We Offer</div>
+    <h2 class="section-title-dark">Three core <em>wiring services.</em></h2>
+    <p class="section-sub-dark">Every job done to ZESCO standard, supervised by EIZ-licensed professionals, using quality conduit and materials.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-card-top">
+          <div class="service-num">01</div>
+          <div class="service-icon">🏠</div>
+        </div>
+        <div class="service-card-body">
+          <div class="service-title">New Installations</div>
+          <div class="service-desc">Professional conduit and house wiring for newly built homes — wired to ZESCO standard and ready for inspection.</div>
+          <ul class="service-includes">
+            <li>Full conduit & cable installation</li>
+            <li>Socket, switch & light point fitting</li>
+            <li>DB board connection & labelling</li>
+            <li>ZESCO inspection support</li>
+            <li>EIZ-licensed sign-off</li>
+          </ul>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-card-top">
+          <div class="service-num">02</div>
+          <div class="service-icon">🔍</div>
+        </div>
+        <div class="service-card-body">
+          <div class="service-title">ZESCO Readiness</div>
+          <div class="service-desc">Wiring audits to ensure your property passes ZESCO inspection. We check, fix, and certify — so you don't fail on the day.</div>
+          <ul class="service-includes">
+            <li>Full wiring inspection & audit</li>
+            <li>Fault finding & rectification</li>
+            <li>Earth continuity testing</li>
+            <li>Compliance report preparation</li>
+            <li>EIZ-licensed certification</li>
+          </ul>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-card-top">
+          <div class="service-num">03</div>
+          <div class="service-icon">⚡</div>
+        </div>
+        <div class="service-card-body">
+          <div class="service-title">DB Board Upgrades</div>
+          <div class="service-desc">Safe and organised circuit breaker setups — correctly sized MCBs, earth leakage protection, dedicated circuits, full labelling.</div>
+          <ul class="service-includes">
+            <li>DB board supply & installation</li>
+            <li>MCB sizing & circuit protection</li>
+            <li>Earth leakage (RCCB) fitting</li>
+            <li>Dedicated cooker & high-load circuits</li>
+            <li>Full labelling & documentation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="zesco-banner">
+      <div class="zesco-icon">🏅</div>
+      <div style="flex:1;min-width:0;">
+        <div class="zesco-title">EIZ-Licensed Supervision · ZESCO Compliant</div>
+        <div class="zesco-desc">All works supervised and certified by EIZ-licensed professionals, ensuring full compliance with ZESCO standards. You get peace of mind — and a certificate to prove it.</div>
+      </div>
+      <div class="zesco-badge">
+        <div class="zesco-badge-title">Service Area</div>
+        <div class="zesco-badge-val">📍 Ndola &<br>Copperbelt</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK QUOTE FORM -->
+<section class="quote-section">
+  <div class="quote-inner">
+    <div>
+      <div class="section-label-dark">Get a Free Quote</div>
+      <h2 class="section-title-dark">Tell us what you <em>need done.</em></h2>
+      <p class="section-sub-dark">Fill in the form and we'll send you a detailed quote via WhatsApp within 24 hours. No obligation, completely free.</p>
+      <div class="quote-trust">
+        <div class="trust-row"><div class="trust-icon">💬</div><div class="trust-text">We respond via WhatsApp within <strong>24 hours</strong></div></div>
+        <div class="trust-row"><div class="trust-icon">🏅</div><div class="trust-text">All quotes include <strong>EIZ-licensed supervision</strong></div></div>
+        <div class="trust-row"><div class="trust-icon">✅</div><div class="trust-text">ZESCO-compliant work, <strong>certified on completion</strong></div></div>
+        <div class="trust-row"><div class="trust-icon">📍</div><div class="trust-text">Serving <strong>Ndola & the Copperbelt</strong></div></div>
+      </div>
+    </div>
+    <div class="quote-form-card">
+      <div class="form-title">Quick Quote Request</div>
+      <div class="form-sub">Takes 2 minutes. We'll build your quote and send it to your WhatsApp.</div>
+      <div class="form-group">
+        <label class="form-label">What service do you need? *</label>
+        <div class="svc-grid" id="svcGrid">
+          <div class="svc-opt" onclick="selectSvc(this,'New House Wiring')">🏠<br>New House Wiring</div>
+          <div class="svc-opt" onclick="selectSvc(this,'Rewiring')">🔄<br>Rewiring Old House</div>
+          <div class="svc-opt" onclick="selectSvc(this,'DB Board')">⚡<br>DB Board Upgrade</div>
+          <div class="svc-opt" onclick="selectSvc(this,'ZESCO Readiness')">✅<br>ZESCO Readiness</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Property Type</label>
+        <select id="propType" class="form-input" style="appearance:none;-webkit-appearance:none;">
+          <option value="">Select property type</option>
+          <option>Single room / Flat</option>
+          <option>2–3 Bedroom House</option>
+          <option>4+ Bedroom House</option>
+          <option>Commercial / Office</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-row form-group">
+        <div>
+          <label class="form-label">Your Name</label>
+          <input type="text" id="custName" class="form-input" placeholder="e.g. John Banda">
+        </div>
+        <div>
+          <label class="form-label">WhatsApp Number</label>
+          <input type="tel" id="custPhone" class="form-input" placeholder="+260 XXX XXX XXX">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Extra Details (optional)</label>
+        <textarea id="custDetails" class="form-input" placeholder="e.g. 3-bedroom house in Ndola, needs full rewiring..."></textarea>
+      </div>
+      <button class="form-btn" onclick="sendQuote()">💬 Send Quote Request via WhatsApp</button>
+      <div class="form-hint">We'll reply to your WhatsApp within 24 hours</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="why">
+  <div class="why-inner">
+    <div class="section-label" style="justify-content:flex-start;">Why BLume Power</div>
+    <h2 class="section-title-light">You're in <em>safe hands.</em></h2>
+    <p class="section-sub-light">NORTEC-trained, EIZ-supervised, ZESCO-ready. We don't just wire houses — we build trust.</p>
+    <div class="why-grid">
+      <div class="why-card"><span class="why-icon">🎓</span><div class="why-title">NORTEC Trained</div><div class="why-desc">Certified electrical engineering training — every connection made with knowledge, not guesswork.</div></div>
+      <div class="why-card"><span class="why-icon">🏅</span><div class="why-title">EIZ-Licensed</div><div class="why-desc">All works supervised by EIZ-licensed professionals. Your installation is fully certified and legal.</div></div>
+      <div class="why-card"><span class="why-icon">✅</span><div class="why-title">ZESCO Compliant</div><div class="why-desc">We wire to ZESCO standard so your property passes inspection without expensive rework.</div></div>
+      <div class="why-card"><span class="why-icon">💬</span><div class="why-title">Free Quote</div><div class="why-desc">Send us photos of your property — we'll give you an honest, detailed quote within 24 hours.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="process-inner">
+    <div class="section-label" style="justify-content:flex-start;">How It Works</div>
+    <h2 class="section-title-light">From quote to <em>ZESCO sign-off.</em></h2>
+    <p class="section-sub-light">A simple, transparent process — you always know what to expect.</p>
+    <div class="process-steps">
+      <div class="process-step"><div class="process-num">01</div><span class="process-icon">💬</span><div class="process-title">WhatsApp Us</div><div class="process-desc">Send a message with your property details and photos.</div><div class="process-arrow">›</div></div>
+      <div class="process-step"><div class="process-num">02</div><span class="process-icon">📋</span><div class="process-title">Free Quote</div><div class="process-desc">Detailed, no-obligation quote within 24 hours — everything included.</div><div class="process-arrow">›</div></div>
+      <div class="process-step"><div class="process-num">03</div><span class="process-icon">🔧</span><div class="process-title">We Wire It</div><div class="process-desc">Professional conduit wiring, clean work, no mess left behind.</div><div class="process-arrow">›</div></div>
+      <div class="process-step"><div class="process-num">04</div><span class="process-icon">🏅</span><div class="process-title">ZESCO Sign-Off</div><div class="process-desc">EIZ-licensed supervisor certifies the work. You get your compliance certificate.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-inner">
+    <div>
+      <div class="cta-title">Ready to wire your home?</div>
+      <p class="cta-sub">Serving Ndola & the Copperbelt. Get your free WhatsApp quote today — we respond within 24 hours.</p>
+    </div>
+    <div class="cta-actions">
+      <a href="https://wa.me/260765692963?text=Hi%20BLume%20Power%2C%20I%27d%20like%20a%20free%20quote%20for%20house%20wiring." target="_blank" class="btn-wa">💬 WhatsApp for Free Quote</a>
+      <a href="#home" class="btn-outline">🌿 Back to Home →</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ END SERVICES SECTION ============ -->
+
 <section class="contact" id="contact">
   <div class="contact-inner">
     <div class="section-label">Get In Touch</div>
@@ -827,7 +1289,98 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script src="blume-config.js"></script>
+<script>
+/* =========================================================================
+   BLume Power Technologies — shared Firebase + EmailJS configuration
+   Used by index.html, services.html, and admin.html.
+
+   SETUP:
+   1. Firebase: console.firebase.google.com → create/open your project
+      - Authentication → Sign-in method → enable Email/Password → add your admin user(s)
+      - Firestore Database → create (production mode is fine)
+      - Project settings → General → Your apps → Web app → copy the config object below
+   2. EmailJS: emailjs.com → add an email service → create a template with
+      variables {{name}} {{phone}} {{service}} {{details}} → copy the three IDs below
+   3. Upload this file alongside index.html, services.html, and admin.html.
+   ========================================================================= */
+
+window.blumeFirebaseConfig = {
+  apiKey: "AIzaSyD31LX-rFk_Jme6gnx1n6qg8ic3wZSTK3g",
+  authDomain: "blume-power-technology.firebaseapp.com",
+  projectId: "blume-power-technology",
+  storageBucket: "blume-power-technology.firebasestorage.app",
+  messagingSenderId: "505398270145",
+  appId: "1:505398270145:web:35dfa429e8288f58ec5c40"
+};
+
+window.BLUME_EMAILJS_PUBLIC_KEY = "QCG0TzBGCPUlHKe1x";
+window.BLUME_EMAILJS_SERVICE_ID = "service_arlambf";
+window.BLUME_EMAILJS_TEMPLATE_ID = "template_cz8me08";
+
+// Initialize once these are filled in — safe no-op otherwise.
+(function () {
+  try {
+    if (window.blumeFirebaseConfig.apiKey !== "AIzaSyD31LX-rFk_Jme6gnx1n6qg8ic3wZSTK3g" && window.firebase) {
+      firebase.initializeApp(window.blumeFirebaseConfig);
+      window.blumeDb = firebase.firestore();
+      if (firebase.auth) window.blumeAuth = firebase.auth();
+    }
+    if (window.BLUME_EMAILJS_PUBLIC_KEY !== "QCG0TzBGCPUlHKe1x" && window.emailjs) {
+      emailjs.init(window.BLUME_EMAILJS_PUBLIC_KEY);
+    }
+  } catch (e) {
+    console.warn("BLume Firebase/EmailJS not configured yet:", e);
+  }
+})();
+
+</script>
+<script>
+// ===== Quote form (from services section) =====
+  let selectedService = "";
+
+  function selectSvc(el, val) {
+    selectedService = val;
+    document.querySelectorAll(".svc-opt").forEach(o => o.classList.remove("active"));
+    el.classList.add("active");
+  }
+
+  function sendQuote() {
+    const name = document.getElementById("custName").value.trim();
+    const phone = document.getElementById("custPhone").value.trim();
+    const prop = document.getElementById("propType").value;
+    const details = document.getElementById("custDetails").value.trim();
+    if (!selectedService) { alert("Please select a service first."); return; }
+    if (!name) { alert("Please enter your name."); return; }
+
+    // Fire-and-forget: save to Firestore + notify by email, never blocks WhatsApp handoff
+    if (window.blumeDb) {
+      window.blumeDb.collection("leads").add({
+        name: name, phone: phone, service: selectedService, property: prop || "", details: details,
+        status: "new", source: "services-quote-form",
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      }).catch(function(err) { console.warn("Lead save failed (non-blocking):", err); });
+    }
+    if (window.emailjs && window.BLUME_EMAILJS_SERVICE_ID) {
+      emailjs.send(window.BLUME_EMAILJS_SERVICE_ID, window.BLUME_EMAILJS_TEMPLATE_ID, {
+        name: name, phone: phone, service: selectedService, details: (prop ? prop + " — " : "") + details
+      }).catch(function(err) { console.warn("EmailJS send failed (non-blocking):", err); });
+    }
+
+    let msg = "Hi BLume Power Technologies!%0A%0A";
+    msg += "📋 *QUOTE REQUEST*%0A";
+    msg += "━━━━━━━━━━━━━━━%0A";
+    msg += "🔧 Service: " + selectedService + "%0A";
+    if (prop) msg += "🏠 Property: " + prop + "%0A";
+    msg += "👤 Name: " + name + "%0A";
+    if (phone) msg += "📞 Number: " + phone + "%0A";
+    if (details) msg += "📝 Details: " + details + "%0A";
+    msg += "━━━━━━━━━━━━━━━%0A";
+    msg += "Please send me a free quote. Thank you!";
+    window.open("https://wa.me/260765692963?text=" + msg, "_blank");
+  }
+
+</script>
+
 <script>
 function sendToWhatsApp() {
   var name = document.getElementById("cf-name").value || "Not provided";
