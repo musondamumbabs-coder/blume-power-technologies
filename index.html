@@ -652,6 +652,66 @@
   }
 
   @keyframes pulse { 0%, 100% { opacity:1; transform:scale(1); } 50% { opacity:0.5; transform:scale(1.3); } }
+/* ===== Stoves section (prefixed stv- to avoid clashing with site styles) ===== */
+.stv-tabs { display: flex; justify-content: center; gap: 0.5rem; margin: 2rem auto 3rem; max-width: 420px; }
+.stv-tab-btn {
+  flex: 1; background: rgba(255,255,255,0.03); border: 0.5px solid rgba(168,213,181,0.15); color: rgba(255,255,255,0.6);
+  padding: 0.85rem 1rem; border-radius: 10px; font-family: inherit; font-size: 13.5px; cursor: pointer; transition: all 0.2s;
+}
+.stv-tab-btn.active { background: rgba(46,139,87,0.18); color: var(--green-light); border-color: var(--green); }
+.stv-panel { display: none; max-width: 900px; margin: 0 auto; }
+.stv-panel.active { display: block; }
+.stv-card { background: rgba(255,255,255,0.03); border: 0.5px solid rgba(168,213,181,0.15); border-radius: 16px; padding: 1.75rem; }
+.stv-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 640px) { .stv-grid2 { grid-template-columns: 1fr; } }
+.stv-field { margin-bottom: 1.1rem; }
+.stv-field label { display: block; font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 0.4rem; }
+.stv-field input, .stv-field select, .stv-field textarea {
+  width: 100%; background: rgba(255,255,255,0.04); border: 0.5px solid rgba(168,213,181,0.15); border-radius: 8px;
+  padding: 0.75rem 0.9rem; color: #fff; font-size: 14px; font-family: inherit;
+}
+.stv-field textarea { min-height: 90px; resize: vertical; }
+.stv-field input:focus, .stv-field select:focus, .stv-field textarea:focus { outline: none; border-color: var(--green-light); }
+.stv-channel-toggle { display: flex; gap: 0.6rem; }
+.stv-channel-toggle label {
+  flex: 1; text-align: center; padding: 0.7rem; border-radius: 8px; border: 0.5px solid rgba(168,213,181,0.15);
+  font-size: 13px; cursor: pointer; color: rgba(255,255,255,0.6);
+}
+.stv-channel-toggle input { display: none; }
+.stv-channel-toggle input:checked + span { color: var(--green-light); }
+.stv-channel-toggle label:has(input:checked) { border-color: var(--green); background: rgba(46,139,87,0.12); }
+.stv-btn {
+  background: var(--green); color: #fff; border: none; padding: 0.85rem 1.75rem; border-radius: 8px;
+  font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit; transition: background 0.2s; width: 100%;
+}
+.stv-btn:hover { background: #266f47; }
+.stv-form-note { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 0.75rem; text-align: center; }
+.stv-success-msg { display: none; background: rgba(46,139,87,0.15); border: 0.5px solid var(--green); border-radius: 10px; padding: 1rem; font-size: 13.5px; margin-bottom: 1.25rem; }
+.stv-success-msg strong { color: var(--gold); }
+.stv-stove-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(230px,1fr)); gap: 1.25rem; margin-top: 1.5rem; }
+.stv-stove-card { background: rgba(255,255,255,0.03); border: 0.5px solid rgba(168,213,181,0.15); border-radius: 14px; overflow: hidden; }
+.stv-stove-card img { width: 100%; height: 160px; object-fit: cover; display: block; background: rgba(255,255,255,0.05); }
+.stv-stove-body { padding: 1.1rem 1.2rem; }
+.stv-stove-body h3 { font-family: 'Playfair Display', serif; font-weight: 400; font-size: 16px; margin-bottom: 0.35rem; }
+.stv-stove-body p { font-size: 12.5px; color: rgba(255,255,255,0.55); line-height: 1.5; margin-bottom: 0.75rem; }
+.stv-stove-price { color: var(--gold); font-weight: 500; font-size: 15px; margin-bottom: 0.85rem; }
+.stv-buy-btn {
+  width: 100%; background: transparent; border: 0.5px solid var(--green-light); color: var(--green-light);
+  padding: 0.6rem; border-radius: 8px; font-size: 13px; cursor: pointer; font-family: inherit; transition: all 0.2s;
+}
+.stv-buy-btn:hover { background: rgba(46,139,87,0.15); }
+.stv-buy-btn.sold { border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.35); cursor: not-allowed; }
+.stv-empty-state { text-align: center; padding: 3rem 1rem; color: rgba(255,255,255,0.35); font-size: 13.5px; grid-column: 1/-1; }
+.stv-modal-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 200;
+  align-items: center; justify-content: center; padding: 1.5rem;
+}
+.stv-modal-overlay.active { display: flex; }
+.stv-modal-box { background: var(--forest); border: 0.5px solid rgba(168,213,181,0.15); border-radius: 16px; padding: 1.75rem; max-width: 400px; width: 100%; }
+.stv-modal-box h3 { font-family: 'Playfair Display', serif; font-weight: 400; font-size: 18px; margin-bottom: 1rem; }
+.stv-modal-actions { display: flex; gap: 0.6rem; margin-top: 1rem; }
+.stv-modal-actions button { flex: 1; }
+.stv-btn-outline { background: transparent; border: 0.5px solid rgba(168,213,181,0.15); color: rgba(255,255,255,0.7); }
 </style>
 </head>
 <body>
@@ -666,6 +726,7 @@
     <li><a href="#products">Products</a></li>
     <li><a href="#story">Our Story</a></li>
     <li><a href="#services">Services</a></li>
+    <li><a href="#stoves">Stoves</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="https://wa.me/260765692963" target="_blank" class="nav-cta">Get Z-Alert</a></li>
   </ul>
@@ -1215,6 +1276,83 @@
 
 <!-- ============ END SERVICES SECTION ============ -->
 
+<!-- ============ STOVES SECTION ============ -->
+<section class="hero" id="stoves" style="padding-bottom:0;">
+  <div class="hero-content" style="text-align:center;">
+    <div class="section-label light" style="justify-content:center;">Stove Marketplace</div>
+    <h1 class="hero-title" style="font-size:clamp(28px,4vw,42px);">Sell your <em>old stove.</em> Buy a <em>refurbished one.</em></h1>
+    <p class="hero-sub" style="max-width:600px;margin:1rem auto 0;">We buy broken or old stoves, restore them, and resell them at fair prices. Get an offer in minutes, or browse what's ready to go.</p>
+  </div>
+</section>
+
+<section style="padding:2rem 4% 5rem;">
+  <div class="stv-tabs">
+    <button class="stv-tab-btn active" onclick="stvShowTab('sell')">Sell Your Stove</button>
+    <button class="stv-tab-btn" onclick="stvShowTab('buy')">Buy a Stove</button>
+  </div>
+
+  <!-- SELL PANEL -->
+  <div class="stv-panel active" id="stv-panel-sell">
+    <div class="stv-card">
+      <div class="stv-success-msg" id="stvSellSuccess">
+        <strong>Request sent!</strong> Your reference is <span id="stvSellRefId"></span>. We'll reply on your preferred channel with an offer, usually within a day.
+      </div>
+      <form id="stvSellForm" onsubmit="stvSubmitSellRequest(event)">
+        <div class="stv-grid2">
+          <div class="stv-field"><label>Full Name</label><input id="stvSellName" required></div>
+          <div class="stv-field"><label>Phone Number</label><input id="stvSellPhone" required></div>
+        </div>
+        <div class="stv-grid2">
+          <div class="stv-field"><label>Email (optional)</label><input id="stvSellEmail" type="email"></div>
+          <div class="stv-field"><label>Location / Area</label><input id="stvSellLocation" required></div>
+        </div>
+        <div class="stv-field">
+          <label>Stove Details</label>
+          <textarea id="stvSellDetails" placeholder="Brand, size, what's wrong with it, how long you've had it..." required></textarea>
+        </div>
+        <div class="stv-field"><label>Your Price Offer (K)</label><input id="stvSellPrice" type="number" min="0" placeholder="e.g. 300"></div>
+        <div class="stv-field">
+          <label>How should we reply?</label>
+          <div class="stv-channel-toggle">
+            <label><input type="radio" name="stvChannel" value="whatsapp" checked><span>WhatsApp</span></label>
+            <label><input type="radio" name="stvChannel" value="email"><span>Email</span></label>
+          </div>
+        </div>
+        <button class="stv-btn" type="submit">Send Request &amp; Attach Photos</button>
+        <div class="stv-form-note">This saves your details, then opens WhatsApp or your email app so you can attach up to 3 photos of the stove directly — that's how we'll receive them.</div>
+      </form>
+    </div>
+  </div>
+
+  <!-- BUY PANEL -->
+  <div class="stv-panel" id="stv-panel-buy">
+    <div class="stv-stove-grid" id="stvStoveGrid">
+      <div class="stv-empty-state">Loading available stoves...</div>
+    </div>
+  </div>
+</section>
+
+<!-- Buy request modal -->
+<div class="stv-modal-overlay" id="stvBuyModal">
+  <div class="stv-modal-box">
+    <h3 id="stvBuyModalTitle">Buy this stove</h3>
+    <div class="stv-field"><label>Your Name</label><input id="stvBuyName" required></div>
+    <div class="stv-field"><label>Phone Number</label><input id="stvBuyPhone" required></div>
+    <div class="stv-field">
+      <label>Preferred Contact</label>
+      <div class="stv-channel-toggle">
+        <label><input type="radio" name="stvBuyChannel" value="whatsapp" checked><span>WhatsApp</span></label>
+        <label><input type="radio" name="stvBuyChannel" value="email"><span>Email</span></label>
+      </div>
+    </div>
+    <div class="stv-modal-actions">
+      <button class="stv-btn stv-btn-outline" onclick="stvCloseBuyModal()">Cancel</button>
+      <button class="stv-btn" onclick="stvConfirmBuyRequest()">Confirm Interest</button>
+    </div>
+  </div>
+</div>
+<!-- ============ END STOVES SECTION ============ -->
+
 <section class="contact" id="contact">
   <div class="contact-inner">
     <div class="section-label">Get In Touch</div>
@@ -1428,6 +1566,131 @@ if (window.blumeDb) {
     document.getElementById("portfolioGallery").innerHTML = html;
   }).catch(function(err) { console.warn("Portfolio load failed:", err); });
 }
+
+/* ---------------- STOVES SECTION ---------------- */
+function stvShowTab(name) {
+  document.querySelectorAll('.stv-tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.stv-panel').forEach(p => p.classList.remove('active'));
+  document.querySelector(`.stv-tab-btn[onclick="stvShowTab('${name}')"]`).classList.add('active');
+  document.getElementById('stv-panel-' + name).classList.add('active');
+}
+function stvGenRefId() { return 'STV-' + Math.floor(1000 + Math.random() * 9000); }
+
+async function stvSubmitSellRequest(e) {
+  e.preventDefault();
+  const name = document.getElementById('stvSellName').value.trim();
+  const phone = document.getElementById('stvSellPhone').value.trim();
+  const email = document.getElementById('stvSellEmail').value.trim();
+  const location = document.getElementById('stvSellLocation').value.trim();
+  const details = document.getElementById('stvSellDetails').value.trim();
+  const price = document.getElementById('stvSellPrice').value;
+  const channel = document.querySelector('input[name="stvChannel"]:checked').value;
+  const refId = stvGenRefId();
+
+  const submitBtn = e.target.querySelector('button[type="submit"]');
+  submitBtn.disabled = true; submitBtn.textContent = 'Sending...';
+
+  try {
+    if (window.blumeDb) {
+      await window.blumeDb.collection('sellRequests').add({
+        refId, name, phone, email, location, details,
+        priceOffer: price || null, preferredChannel: channel,
+        status: 'new', createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+    }
+    if (window.emailjs && window.BLUME_EMAILJS_SERVICE_ID) {
+      emailjs.send(window.BLUME_EMAILJS_SERVICE_ID, window.BLUME_EMAILJS_TEMPLATE_ID, {
+        name, phone, service: 'Stove Sell Request (' + refId + ')',
+        details: `${location} — ${details} — Offer: K${price || 'n/a'} — Reply via ${channel} — photos to follow via ${channel}`
+      }).catch(err => console.warn('EmailJS failed (non-blocking):', err));
+    }
+  } catch (err) {
+    console.warn('Sell request save failed:', err);
+  }
+
+  document.getElementById('stvSellRefId').textContent = refId;
+  document.getElementById('stvSellSuccess').style.display = 'block';
+
+  if (channel === 'whatsapp') {
+    const msg = `Hi BLume Power Technologies! I'd like to sell a stove.%0A%0A`
+      + `*Ref:* ${refId}%0A*Name:* ${encodeURIComponent(name)}%0A*Phone:* ${encodeURIComponent(phone)}%0A`
+      + `*Location:* ${encodeURIComponent(location)}%0A*Details:* ${encodeURIComponent(details)}%0A`
+      + `*My price offer:* K${price || 'n/a'}%0A%0AAttaching up to 3 photos now.`;
+    window.open('https://wa.me/260765692963?text=' + msg, '_blank');
+  } else {
+    const subject = encodeURIComponent(`Stove Sell Request — ${refId}`);
+    const body = encodeURIComponent(
+      `Ref: ${refId}\nName: ${name}\nPhone: ${phone}\nLocation: ${location}\nDetails: ${details}\nMy price offer: K${price || 'n/a'}\n\n(Attach up to 3 photos of the stove to this email)`
+    );
+    window.open(`mailto:info@blumepowertech.com?subject=${subject}&body=${body}`, '_blank');
+  }
+
+  document.getElementById('stvSellForm').reset();
+  submitBtn.disabled = false; submitBtn.textContent = 'Send Request & Attach Photos';
+  document.getElementById('stvSellSuccess').scrollIntoView({ behavior: 'smooth' });
+}
+
+let stvCurrentBuyStove = null;
+function stvLoadStoves() {
+  if (!window.blumeDb) {
+    document.getElementById('stvStoveGrid').innerHTML = `<div class="stv-empty-state">Marketplace connecting... check back shortly.</div>`;
+    return;
+  }
+  window.blumeDb.collection('stovesForSale').orderBy('createdAt', 'desc').onSnapshot(snap => {
+    if (snap.empty) {
+      document.getElementById('stvStoveGrid').innerHTML = `<div class="stv-empty-state">No stoves listed yet — check back soon.</div>`;
+      return;
+    }
+    let html = '';
+    snap.forEach(doc => {
+      const d = doc.data();
+      const sold = d.status === 'sold';
+      html += `<div class="stv-stove-card">
+        <img src="${d.image || ''}" onerror="this.style.display='none'">
+        <div class="stv-stove-body">
+          <h3>${stvEsc(d.title || 'Refurbished Stove')}</h3>
+          <p>${stvEsc(d.description || '')}</p>
+          <div class="stv-stove-price">K${d.price || '—'}</div>
+          <button class="stv-buy-btn ${sold ? 'sold' : ''}" ${sold ? 'disabled' : `onclick="stvOpenBuyModal('${doc.id}','${stvEsc(d.title||'')}')"`}>
+            ${sold ? 'Sold' : 'I want this'}
+          </button>
+        </div>
+      </div>`;
+    });
+    document.getElementById('stvStoveGrid').innerHTML = html;
+  });
+}
+function stvOpenBuyModal(id, title) {
+  stvCurrentBuyStove = { id, title };
+  document.getElementById('stvBuyModalTitle').textContent = 'Buy: ' + title;
+  document.getElementById('stvBuyModal').classList.add('active');
+}
+function stvCloseBuyModal() { document.getElementById('stvBuyModal').classList.remove('active'); stvCurrentBuyStove = null; }
+function stvConfirmBuyRequest() {
+  const name = document.getElementById('stvBuyName').value.trim();
+  const phone = document.getElementById('stvBuyPhone').value.trim();
+  const channel = document.querySelector('input[name="stvBuyChannel"]:checked').value;
+  if (!name || !phone) { alert('Please enter your name and phone number.'); return; }
+  if (window.blumeDb && stvCurrentBuyStove) {
+    window.blumeDb.collection('buyRequests').add({
+      stoveId: stvCurrentBuyStove.id, stoveTitle: stvCurrentBuyStove.title,
+      name, phone, preferredChannel: channel, status: 'new',
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  }
+  if (window.emailjs && window.BLUME_EMAILJS_SERVICE_ID) {
+    emailjs.send(window.BLUME_EMAILJS_SERVICE_ID, window.BLUME_EMAILJS_TEMPLATE_ID, {
+      name, phone, service: 'Stove Purchase Interest: ' + (stvCurrentBuyStove ? stvCurrentBuyStove.title : ''),
+      details: `Reply via ${channel}`
+    }).catch(err => console.warn('EmailJS failed (non-blocking):', err));
+  }
+  stvCloseBuyModal();
+  alert("Thanks! We've got your interest and will reach out to confirm the sale.");
+}
+function stvEsc(str) {
+  return String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+stvLoadStoves();
 </script>
 
 <section class="cta-banner">
