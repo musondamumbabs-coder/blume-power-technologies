@@ -6,6 +6,9 @@
 <title>BLume Power Technologies</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+ :root {
+  --watermark-logo: url("data:image/png;base64,PASTE_YOUR_LOGO_BASE64_STRING_HERE");
+}
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
     --green: #2E8B57; --green-light: #A8D5B5;
@@ -712,6 +715,20 @@
 .stv-modal-actions { display: flex; gap: 0.6rem; margin-top: 1rem; }
 .stv-modal-actions button { flex: 1; }
 .stv-btn-outline { background: transparent; border: 0.5px solid rgba(168,213,181,0.15); color: rgba(255,255,255,0.7); }
+body::before {
+  content: "";
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 480px; height: 480px;
+  background-image: var(--watermark-logo);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 0;
+}
 </style>
 </head>
 <body>
