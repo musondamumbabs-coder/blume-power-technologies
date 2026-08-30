@@ -938,6 +938,65 @@ body::before {
   </div>
 </footer>
 
+<!-- ============ MORE PRODUCTS (dynamic) ============ -->
+<section style="padding:2rem 4% 5rem;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-header" style="text-align:center;margin-bottom:2.5rem;">
+      <div class="section-label light" style="justify-content:center;">Coming From BLume</div>
+      <h2 class="section-title">More <em>products.</em></h2>
+      <p class="section-sub">The rest of our security &amp; electrical lineup, past and future.</p>
+    </div>
+    <div id="moreProductsGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.25rem;">
+      <div style="grid-column:1/-1;text-align:center;color:rgba(255,255,255,0.35);font-size:13px;padding:2rem;">Loading products...</div>
+    </div>
+  </div>
+</section>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+/* Firebase + EmailJS: same config as the rest of the site */
+window.blumeFirebaseConfig = {
+  apiKey: "AIzaSyD31LX-rFk_Jme6gnx1n6qg8ic3wZSTK3g",
+  authDomain: "blume-power-technology.firebaseapp.com",
+  projectId: "blume-power-technology",
+  storageBucket: "blume-power-technology.firebasestorage.app",
+  messagingSenderId: "505398270145",
+  appId: "1:505398270145:web:35dfa429e8288f58ec5c40"
+};
+try {
+  if (window.blumeFirebaseConfig.apiKey && window.firebase) {
+    firebase.initializeApp(window.blumeFirebaseConfig);
+    window.blumeDb = firebase.firestore();
+  }
+} catch (e) { console.warn("Firebase not ready:", e); }
+
+function pEsc(str) {
+  return String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+if (window.blumeDb) {
+  window.blumeDb.collection('products').orderBy('createdAt', 'desc').get().then(snap => {
+    if (snap.empty) {
+      document.getElementById('moreProductsGrid').innerHTML =
+        '<div style="grid-column:1/-1;text-align:center;color:rgba(255,255,255,0.35);font-size:13px;padding:2rem;">More products coming soon.</div>';
+      return;
+    }
+    let html = '';
+    snap.forEach(doc => {
+      const d = doc.data();
+      html += `<div style="background:rgba(255,255,255,0.03);border:0.5px solid rgba(168,213,181,0.15);border-radius:16px;overflow:hidden;position:relative;">
+        ${d.comingSoon ? '<div style="position:absolute;top:12px;right:12px;background:rgba(255,209,102,0.15);color:#FFD166;font-size:11px;padding:0.3rem 0.7rem;border-radius:20px;font-weight:500;">Coming Soon</div>' : ''}
+        <img src="${pEsc(d.image||'')}" style="width:100%;height:160px;object-fit:cover;display:block;" onerror="this.style.display='none'">
+        <div style="padding:1.1rem 1.2rem;">
+          <div style="font-family:'Playfair Display',serif;font-size:16px;margin-bottom:0.35rem;">${pEsc(d.name||'')}</div>
+          <div style="font-size:12.5px;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:0.5rem;">${pEsc(d.description||'')}</div>
+          ${d.price ? `<div style="color:#FFD166;font-weight:500;font-size:14px;">${pEsc(d.price)}</div>` : ''}
+        </div>
+      </div>`;
+    });
+    document.getElementById('moreProductsGrid').innerHTML = html;
+  }).catch(err => console.warn('Products load failed:', err));
+}
+</script>
 </body>
 </html>
