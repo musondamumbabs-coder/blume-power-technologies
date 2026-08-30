@@ -793,8 +793,10 @@ body::before {
   <div class="product-hero-inner">
     <div>
       <div class="section-label light">Our Flagship Product</div>
-      <h2 class="product-title">Z-Alert<br><span class="accent">Cable Sensor</span></h2>
-      <p class="product-tagline">A GSM-based cable theft alarm that detects disturbance the moment it happens and fires an instant SMS alert — so you never lose power, connectivity, or livelihood to theft again.</p>
+      <h2 class="product-title" id="featuredProductTitle">Z-Alert<br><span class="accent">Cable Sensor</span></h2>
+      <p class="product-tagline" id="featuredProductTagline">A GSM-based cable theft alarm that detects disturbance the moment it happens and fires an instant SMS alert — so you never lose power, connectivity, or livelihood to theft again.</p>
+      <div id="featuredProductPrice" style="display:none;color:var(--gold);font-weight:500;font-size:16px;margin-bottom:1rem;"></div>
+      <div id="featuredComingSoonBadge" style="display:none;background:rgba(255,209,102,0.15);color:var(--gold);font-size:12px;padding:0.35rem 0.9rem;border-radius:20px;font-weight:500;margin-bottom:1rem;">Coming Soon</div>
       <div class="product-badges">
         <span class="pbadge pbadge-green">✅ GSM Network</span>
         <span class="pbadge pbadge-green">✅ 24/7 Monitoring</span>
@@ -938,7 +940,8 @@ body::before {
   </div>
 </footer>
 
-<!-- ============ MORE PRODUCTS (dynamic) ============ -->
+
+<!-- ============ MORE PRODUCTS (dynamic, admin-managed) ============ -->
 <section style="padding:2rem 4% 5rem;">
   <div style="max-width:1100px;margin:0 auto;">
     <div class="section-header" style="text-align:center;margin-bottom:2.5rem;">
@@ -955,7 +958,7 @@ body::before {
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script>
-/* Firebase + EmailJS: same config as the rest of the site */
+/* Firebase config: same project as the rest of the site */
 window.blumeFirebaseConfig = {
   apiKey: "AIzaSyD31LX-rFk_Jme6gnx1n6qg8ic3wZSTK3g",
   authDomain: "blume-power-technology.firebaseapp.com",
@@ -974,28 +977,50 @@ try {
 function pEsc(str) {
   return String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 }
+
 if (window.blumeDb) {
+  // Featured product overrides the hero title/tagline/price/coming-soon badge
+  window.blumeDb.collection('products').where('featured', '==', true).limit(1).get().then(snap => {
+    if (snap.empty) return; // keep static Z-Alert defaults until admin sets a Featured product
+    const d = snap.docs[0].data();
+    if (d.name) document.getElementById('featuredProductTitle').textContent = d.name;
+    if (d.description) document.getElementById('featuredProductTagline').textContent = d.description;
+    if (d.price) {
+      const priceEl = document.getElementById('featuredProductPrice');
+      priceEl.textContent = d.price;
+      priceEl.style.display = 'block';
+    }
+    if (d.status === 'coming_soon') document.getElementById('featuredComingSoonBadge').style.display = 'inline-block';
+  }).catch(err => console.warn('Featured product load failed:', err));
+
+  // Grid of everything else
   window.blumeDb.collection('products').orderBy('createdAt', 'desc').get().then(snap => {
-    if (snap.empty) {
+    const rest = snap.docs.filter(doc => !doc.data().featured);
+    if (!rest.length) {
       document.getElementById('moreProductsGrid').innerHTML =
         '<div style="grid-column:1/-1;text-align:center;color:rgba(255,255,255,0.35);font-size:13px;padding:2rem;">More products coming soon.</div>';
       return;
     }
     let html = '';
-    snap.forEach(doc => {
+    const statusBadge = (status) => {
+      if (status === 'coming_soon') return '<div style="position:absolute;top:12px;right:12px;background:rgba(255,209,102,0.15);color:#FFD166;font-size:11px;padding:0.3rem 0.7rem;border-radius:20px;font-weight:500;">Coming Soon</div>';
+      if (status === 'sold_out') return '<div style="position:absolute;top:12px;right:12px;background:rgba(232,93,93,0.15);color:#E85D5D;font-size:11px;padding:0.3rem 0.7rem;border-radius:20px;font-weight:500;">Sold Out</div>';
+      return '';
+    };
+    rest.forEach(doc => {
       const d = doc.data();
-      html += `<div style="background:rgba(255,255,255,0.03);border:0.5px solid rgba(168,213,181,0.15);border-radius:16px;overflow:hidden;position:relative;">
-        ${d.comingSoon ? '<div style="position:absolute;top:12px;right:12px;background:rgba(255,209,102,0.15);color:#FFD166;font-size:11px;padding:0.3rem 0.7rem;border-radius:20px;font-weight:500;">Coming Soon</div>' : ''}
+      html += `<a href="product-detail.html?id=${doc.id}" style="text-decoration:none;color:inherit;background:rgba(255,255,255,0.03);border:0.5px solid rgba(168,213,181,0.15);border-radius:16px;overflow:hidden;position:relative;display:block;">
+        ${statusBadge(d.status)}
         <img src="${pEsc(d.image||'')}" style="width:100%;height:160px;object-fit:cover;display:block;" onerror="this.style.display='none'">
         <div style="padding:1.1rem 1.2rem;">
           <div style="font-family:'Playfair Display',serif;font-size:16px;margin-bottom:0.35rem;">${pEsc(d.name||'')}</div>
           <div style="font-size:12.5px;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:0.5rem;">${pEsc(d.description||'')}</div>
           ${d.price ? `<div style="color:#FFD166;font-weight:500;font-size:14px;">${pEsc(d.price)}</div>` : ''}
         </div>
-      </div>`;
+      </a>`;
     });
     document.getElementById('moreProductsGrid').innerHTML = html;
-  }).catch(err => console.warn('Products load failed:', err));
+  }).catch(err => console.warn('Products grid load failed:', err));
 }
 </script>
 </body>
